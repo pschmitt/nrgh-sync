@@ -219,6 +219,7 @@ sync_starred() {
   do
     index=$(( index + 1 ))
     echo "Processing $proj [${index}/${#starred_repos[@]}]"
+
     if [[ -n "$DRYRUN" ]]
     then
       echo "DRY RUN: Would subscribe to $proj" >&2
