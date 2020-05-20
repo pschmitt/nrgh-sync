@@ -136,6 +136,8 @@ nr_subscribe() {
   local email_freq=none
   local action=add
 
+  echo "Subscribing to $repo"
+
   if is_already_subscribed "$repo"
   then
     echo "Already subscribed to $repo. Updating." >&2
@@ -175,8 +177,6 @@ sync_deletions() {
 
   for proj in "${nr_projects[@]}"
   do
-    echo "Checking $proj for deletion" >&2
-
     delete_repo=1
 
     for repo in "${starred_repos[@]}"
@@ -226,7 +226,6 @@ sync_starred() {
 
   for proj in "${starred_repos[@]}"
   do
-    echo "Subscribe to $proj"
     if [[ -n "$DRYRUN" ]]
     then
       echo "DRY RUN: Would subscribe to $proj" >&2
