@@ -215,8 +215,11 @@ sync_starred() {
     return 7
   fi
 
+  local index=0
   for proj in "${starred_repos[@]}"
   do
+    index=$(( index + 1 ))
+    echo "Processing $proj [${index}/${#starred_repos[@]}]"
     if [[ -n "$DRYRUN" ]]
     then
       echo "DRY RUN: Would subscribe to $proj" >&2
