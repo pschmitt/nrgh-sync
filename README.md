@@ -1,5 +1,15 @@
 # nrgh-sync
 
+This script allows you to periodically sync the repositories you starred on
+GitHub with your watched project list on [newreleases.io](http://newreleases.io/).
+
+At the time of this writing it only supports the following config, but it can 
+easily be adapted to your specific needs:
+
+- no email notifications (explicitly "none")
+- discord notifications on the first channel you set up
+- ignore pre-releases
+
 # Installation
 
 Dependencies:
@@ -22,4 +32,5 @@ You may hit rate-limiting if you have a lot of starred repositories.
 
 nrgh-sync will automatically wait and retry if it hits the limit.
 
-If you really need to raise the limits you should [get in touch with the newreleases.io team](https://newreleases.io/contact).
+If you really need to raise the limits you should 
+[get in touch with the newreleases.io team](https://newreleases.io/contact).
