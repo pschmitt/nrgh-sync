@@ -6,7 +6,7 @@ usage() {
   local self
   self="$(basename "$0")"
 
-  echo "Usage: ${self} GITHUB_TOKEN REST_EXPRESSION"
+  echo "Usage: ${self} [-t GITHUB_TOKEN] REST_EXPRESSION"
   echo "Examples:"
   echo "$self XXX /user"
   echo "$self XXX /users/pschmitt/starred"
@@ -31,14 +31,28 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 then
   set -e
 
-  if [[ $# -lt 2 ]]
+  case "$1" in
+    --token|-t)
+      GITHUB_TOKEN="$2"
+      shift 2
+      ;;
+  esac
+
+  REST_EXPRESSION="${1#/}"  # remove leading '/'
+
+  if [[ -z "$GITHUB_TOKEN" ]]
   then
+    echo "Missing GitHub token." >&2
     usage
     exit 2
   fi
 
-  GITHUB_TOKEN="$1"
-  REST_EXPRESSION="${2#/}"  # remove leading '/'
+  if [[ -z "$REST_EXPRESSION" ]]
+  then
+    echo "Missing REST endpoint." >&2
+    usage
+    exit 2
+  fi
 
   URL="https://api.github.com/${REST_EXPRESSION}"
 

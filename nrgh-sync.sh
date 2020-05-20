@@ -10,7 +10,7 @@ get_starred_repos() {
 
   cd "$(readlink -f "$(dirname "$0")")" || exit 9
 
-  gh_username="$(./github.sh "$token" /user | jq -r '.login')"
+  gh_username="$(./github.sh -t "$token" /user | jq -r '.login')"
 
   if [[ -z "$gh_username" ]]
   then
@@ -18,7 +18,7 @@ get_starred_repos() {
     return 8
   fi
 
-  ./github.sh "$token" "/users/${gh_username}/starred" | \
+  ./github.sh -t "$token" "/users/${gh_username}/starred" | \
     jq -r '.[].full_name' | \
     sort -f
 }
@@ -47,6 +47,7 @@ nr() {
       if grep -qi "too many requests" <<< "$res"
       then
         echo "Too many requests. We need to wait to continue." >&2
+        date >&2
         sleep 30m
       else
         echo "$res" >&2
