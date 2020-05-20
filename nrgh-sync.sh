@@ -33,10 +33,9 @@ get_starred_repos() {
     return 8
   fi
 
-  ./github.sh \
-      "$token" \
-      "/users/${gh_username}/starred" | \
-    jq -r '.[].full_name'
+  ./github.sh "$token" "/users/${gh_username}/starred" | \
+    jq -r '.[].full_name' | \
+    sort -f
 }
 
 _nr() {
