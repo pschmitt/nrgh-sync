@@ -47,7 +47,7 @@ nr() {
       if grep -qi "too many requests" <<< "$res"
       then
         echo "Too many requests. We need to wait to continue." >&2
-        sleep 10m
+        sleep 30m
       else
         echo "$res" >&2
         return 1
