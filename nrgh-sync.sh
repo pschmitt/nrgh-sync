@@ -4,21 +4,6 @@ usage() {
   echo "Usage: $(basename "$0") sync|delete [-n] --gh-token GH_TOKEN --nr-token NR_TOKEN [--delete]"
 }
 
-# https://stackoverflow.com/a/41069638/1872036
-catch() {
-  eval "$({
-    __2="$(
-      { __1="$("${@:3}")"; } 2>&1;
-      ret=$?;
-      printf '%q=%q\n' "$1" "$__1" >&2;
-      exit $ret
-      )"
-    ret="$?";
-    printf '%s=%q\n' "$2" "$__2" >&2;
-    printf '( exit %q )' "$ret" >&2;
-    } 2>&1 )";
-}
-
 get_starred_repos() {
   local token="$1"
   local gh_username
@@ -50,22 +35,21 @@ _nr() {
 }
 
 nr() {
-  local stderr
-  local stdout
+  local res
 
   while true
   do
-    if catch stdout stderr _nr "$@"
+    if res=$(_nr "$@" 2>&1)
     then
-      echo "$stdout"
+      echo "$res"
       return
     else
-      if grep -qi "too many requests" <<< "$stderr"
+      if grep -qi "too many requests" <<< "$res"
       then
         echo "Too many requests. We need to wait to continue." >&2
         sleep 10m
       else
-        echo "$stderr" >&2
+        echo "$res" >&2
         return 1
       fi
     fi
