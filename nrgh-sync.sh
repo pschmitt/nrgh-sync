@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: $(basename "$0") sync|delete --gh-token GH_TOKEN --nr-token NR_TOKEN [--delete]"
+  echo "Usage: $(basename "$0") sync|delete [-n] --gh-token GH_TOKEN --nr-token NR_TOKEN [--delete]"
 }
 
 # https://stackoverflow.com/a/41069638/1872036
