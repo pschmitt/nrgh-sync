@@ -62,7 +62,7 @@ then
   if [[ -z "$PAGES" ]]
   then
     # Single page result
-    gh_curl "$URL"
+    gh_curl "$URL" | jq
   else
     echo "There are $PAGES pages of results" >&2
     # Pagination
@@ -72,7 +72,7 @@ then
       res_page="$(gh_curl "${URL}?page=$page")"
       res="$(jq -s '.[0] + .[1]' <<< "${res} ${res_page}")"
     done
-    echo "$res"
+    jq <<< "$res"
   fi
 fi
 
