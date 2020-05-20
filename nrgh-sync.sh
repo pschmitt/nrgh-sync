@@ -288,6 +288,7 @@ then
         ;;
       *)
         echo "Unknown option: $1"
+        usage
         exit 2
         ;;
     esac
