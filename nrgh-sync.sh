@@ -100,10 +100,11 @@ nr_list_gh_sub_page() {
 }
 
 nr_list_all_subscriptions() {
-  local res
+  local output
   local page=1
   local proj
   local projects=()
+  local res
 
   while res="$(nr_list_gh_sub_page "$page")"
   do
@@ -114,10 +115,10 @@ nr_list_all_subscriptions() {
       if [[ -z "$proj" ]]
       then
         # No more projects, return output
-        for proj in "${projects[@]}"
+        for output in "${projects[@]}"
         do
-          echo "$proj"
-        done
+          echo "$output"
+        done | sort -f
         return
       fi
       projects+=("$proj")
