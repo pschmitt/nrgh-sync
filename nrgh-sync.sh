@@ -191,7 +191,12 @@ sync_starred() {
   local proj
   local starred_repos
 
-  discord_channel_id="$(get_discord_channel_id)"
+  if [[ -n "$DRYRUN" ]]
+  then
+    discord_channel_id="__FAKE__DISCORD_CHANNEL_ID__"
+  else
+    discord_channel_id="$(get_discord_channel_id)"
+  fi
 
   if [[ -z "$discord_channel_id" ]]
   then
