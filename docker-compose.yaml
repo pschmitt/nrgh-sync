@@ -1,0 +1,9 @@
+---
+version: "3.8"
+
+services:
+  nrgh-sync:
+    image: pschmitt/nrgh-sync:latest
+    environment:
+      - GH_TOKEN=xxx
+      - NR_TOKEN=xxx
