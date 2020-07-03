@@ -12,11 +12,13 @@ RUN apk add --no-cache bash curl jq && \
       -O /usr/local/bin/newreleases && \
     chmod +x /usr/local/bin/newreleases
 
-COPY ./nrgh-sync.sh /usr/local/bin/nrgh-sync
+COPY ./docker/entrypoint.sh /entrypoint.sh
+COPY ./docker/nrgh-sync-wrapper.sh /usr/local/bin/nrgh-sync-wrapper.sh
 COPY ./github.sh /usr/local/bin/github.sh
-COPY ./entrypoint.sh /entrypoint.sh
+COPY ./nrgh-sync.sh /usr/local/bin/nrgh-sync
 
 ENV GH_TOKEN=
 ENV NR_TOKEN=
+ENV SLEEP_INTERVAL=5m
 
 ENTRYPOINT ["/entrypoint.sh"]

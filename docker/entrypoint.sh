@@ -12,4 +12,4 @@ then
   exit 2
 fi
 
-exec nrgh-sync --gh-token "$GH_TOKEN" --nr-token "$NR_TOKEN"
+exec nrgh-sync-wrapper.sh
