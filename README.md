@@ -1,5 +1,7 @@
 # nrgh-sync
 
+[![Build](https://github.com/pschmitt/nrgh-sync/workflows/Build/badge.svg)](https://github.com/pschmitt/nrgh-sync/actions?query=workflow%3ABuild)
+
 This script allows you to periodically sync the repositories you starred on
 GitHub with your watched project list on [newreleases.io](http://newreleases.io/).
 
